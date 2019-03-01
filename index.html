@@ -2,27 +2,289 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Renee Huang Website</title>
+    <title>RH</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=PT+Sans"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="title">
       <h1>Renee Huang</h1>
+      Software Engineer. Currently working abroad in Taipei, Taiwan.
     </div>
     <div class="content">
-      <div class="posts pull-left">
-        <h3>Posts</h3>
-        <ul>
-          Post
-        </ul>
+      <div class="content-left">
+        <div class="posts pull-left">
+          <div class="post react-posts js-posts" id="React.Context-vs-Redux">
+            <h1>[React][JS] React's new Context API versus Redux</h1>
+            <p>
+              React's new Context API allows for easy data access across
+              multiple components, just like Redux does. Initially, I wondered
+              when should Context or Redux be used in regards to data access?
+            </p>
+            <p>
+              According to reactjs.org: "Context provides a way to pass data
+              through the component tree without having to pass props down
+              manually at every level."
+            </p>
+            <p>
+              <a href="http://www.gistia.com/beginners-guide-redux/">
+                Redux on the other hand is "a predictable state container for
+                JavaScript apps."</a
+              >
+              <br />
+              At first glance, one may wonder whether one should one use Context
+              to pass data easily from point A to point B, or whether one should
+              use Redux, which also allows for easy data access.
+            </p>
+            <p>
+              It seems like it will generally be better to use React's Context
+              API first if one only needed to pass data through multiple level
+              of components. Redux seems to have a whole host of powerful
+              utilities. I'll stay away from it for now, at least until I need
+              something more powerful and more than just data accessing.
+            </p>
+            <p>
+              Here are links to more detailed information on this:
+            </p>
+            <ul>
+              <li>
+                https://stackoverflow.com/questions/49568073/react-context-vs-react-redux-when-should-i-use-each-one
+              </li>
+            </ul>
+          </div>
+          <div class="post js-posts" id="shallow-vs-deep-copy">
+            <h1>[JS] Shallow vs Deep Copy of Objects</h1>
+            <p>
+              &nbsp;&nbsp;&nbsp;I came across a bug the other day at work, that
+              was all attributed to shallow vs deep copy functionalities of
+              objects.
+            </p>
+            <h4>What are shallow copies vs. deep copies?</h4>
+            <p>
+              When we do a shallow copy an object, only the references of the
+              fields of the objects are copied to reference the other objects.
+            </p>
+            <p>
+              When we do a deep copy, the references to the object is not
+              copied. Instead, the values referenced are copied. Thus, changing
+              values of one object will not affect the values of the other
+              copied object.
+            </p>
+            <p>
+              <!-- <h4>Here's an example to clear up any confusion:</h4> -->
+              <!-- <br> -->
+              We have two objects, object A and object B.
+              <!-- <br> -->
+              When object B makes a shallow copy of object A, any changes to
+              Object A will also be reflected in Object B.
+              <!-- <br>  -->
+              On the other hand, if we make object B a deep copy of object A,
+              any changes to object A will not affect Object B.
+            </p>
+            <p>
+              I came across this issue when using React Highcharts. Our Pie
+              chart from React Highcharts required a chart configuration, which
+              was made up of an object.
+            </p>
+            <p>
+              We used and re-used this component to create many pie-charts.
+              There was a value we can set in the chart configuration object
+              that allowed for semi-donut charts and full-donut charts.
+            </p>
+            <p>
+              However, when one chart configuration for the semi-donut values
+              were set, the previously set chart configurations for the
+              full-donut chart were also changed to a semi-donut configuration.
+            </p>
+            <p>
+              This was because we were only using a shallow copy of the React
+              Highchart's chart configuration. A shallow copy of an object has
+              the copied object referencing the same values of the original
+              object. Changing one value of the object (through either the
+              original or copied object) will affect the other object.
+            </p>
+            <p>
+              This is exactly what happened with the bug I encountered at work.
+              The shallow copied chart config object was changed the second time
+              I used the Pie component. That was why changing the chart
+              configuration of the Pie chart to semi-donut values also changed
+              the previous Pie chart--they were both referencing the same
+              object!
+            </p>
+            <h4>How to avoid this?</h4>
+            <p>
+              <br />Be careful about using Object.assign() to copy objects, as
+              Object.assign() makes a shallow copy. For redux, it is okay since
+              Redux only contains immutable data.
+            </p>
+            <h4>Nested Objects?</h4>
+            <p>
+              If we don't know how deeply nested our objects are, you can call
+              JSON.stringify and then parse the object to resolve this issue.
+            </p>
+
+            <p>
+              A neat little tid bit to be careful of when coding. Shallow copies
+              add deep copies deep copies are not language specific. This can
+              happen in C or Java, not just JS!
+            </p>
+            <p>
+              <br />
+              Here's a
+              <a
+                href="https://we-are.bookmyshow.com/understanding-deep-and-shallow-copy-in-javascript-13438bad941c"
+                >link
+              </a>
+              for more information!
+            </p>
+          </div>
+          <div class="post html-posts" id="basic-html-tag-meaning">
+            <h1>[HTML] What do the basic html tags mean?</h1>
+            <p>
+              I realize I have been using html tags to create basic html pages,
+              but I've long forgotten what each tag actually means!
+            </p>
+            <p>Here's to rectifying that.</p>
+            <div class="code-block">
+              <pre>
+    <code>
+    &lt;!doctype html&gt; // 1. tells the web browser about what version it is, 
+                    // 2. tells the browser how to render the page in standards compliant mode
+    &lt;html&gt;  // tells the browser that this is an html page
+        &lt;head&gt; // used to contain specific information about a web page, 
+            &lt;meta charset="UTF-8"&gt; //represents metadata that cannot be represented by other 
+                                   // HTML meta-related elements
+            &lt;title&gt; // title of the document, often visible on the browser tab
+        &lt;body&gt; // defines the document body
+            
+        &lt;/body&gt;
+    &lt;/html&gt;
+    </code>
+                </pre>
+            </div>
+            <br />
+            Actually, looking back at it, everything is pretty straightforward.
+            Still, good to know!
+          </div>
+
+          <div class="post personal-posts" id="2019-goals">
+            <h1>[Personal] My 2019 Goals</h1>
+            <p>
+              In the past few months, I have came to the realization that I
+              don't dream nearly enough. Consequently, my life became filled
+              with ambivalence, passivity, and mediocrity. Luckily, I was able
+              to realize what was happening to my life and create actionable
+              steps to resolve this.
+            </p>
+            <p>
+              With this knowledge, I have set certain themes and goals for 2019.
+            </p>
+            <pre> 
+    My 2019 themes are to: 
+            - become more proactive and action-oriented
+            - prioritize getting things done over perfection
+            - do my best and not let fear of failure stop me
+            - live in the moment more
+            - do the things I've always wanted to do
+                - take JLPT (Japanese Language Proficiency Test)
+                - become a writer
+                - read a lot more
+                - contribute to open source
+                - figure out how I can apply myself to support causes that I care about
+                - become stronger mentally
+
+    My actionable steps to achieve the above mentioened themes are as follows:
+            1. become a better developer
+                [x] create my online porfolio
+                [2.5] create twenty different web-applications
+                    [ ] Javascript 30
+                    [ ] React 30 
+                [ ] write posts on things that I have learned
+                [March/April] go through Javascript textbook
+                [August] go through CLRS Algorithms textbook again
+                [July] make 20 commits to open source
+                [April] code an OS on Raspberry Pi following <a href="https://github.com/s-matyukevich/raspberry-pi-os">this github tutorial</a>
+            2. Take the JLPT Exam
+                [ ] Pass the N3 Exam in July
+                [ ] Pass the N2 Exam in December
+            3. [6/30] Read 30 different books
+                [0/12] finish the books on my tech/coding Goodreads shelf
+                [x] Join the Feminist book club
+            4. Become a better public speaker
+                - Attend the bi-monthly Toastmasters meetings
+            5. [4/50] Write 50 articles to become a better writer
+            </pre>
+          </div>
+        </div>
       </div>
-      <div class="vertical-nav-bar pull-right">
-        <ul>
-          <li><h3>About Me</h3></li>
-          <li><h3>Projects</h3></li>
-          <li><h3>Posts</h3></li>
-        </ul>
+      <div class="content-right pull-right">
+        <div class="about-me ">
+          <h3>About Me</h3>
+          <p>
+            Always trying to better myself and my technical abilities.
+            <br /><br />
+            Passionate about about supporting groups underrepresented in STEM,
+            and minorities/female empowerment in general.
+            <br /><br />
+            Currently working on: React 30 by WesBos. Click
+            <a href="#2019-goals">here</a> to see my goals for 2019.
+            <br />
+          </p>
+        </div>
+        <div class="vertical-navbar">
+          <div class="navbar-items">
+            <div class="navbar-item">
+              <button class="accordion"><h3>Projects</h3></button>
+              <div class="panel">
+                <a href="#"><p>[React] Basic To-Do List</p></a>
+                <a href="#"><p>[React] Basic Calculator App</p></a>
+                <a href="#"><p>[JS] 30 Days of Javascript</p></a>
+              </div>
+            </div>
+            <div class="navbar-item">
+              <button class="accordion"><h3>Posts</h3></button>
+              <div class="panel">
+                <p>
+                  <a href="#React.Context-vs-Redux">
+                    [React][JS] React's new Context API versus Redux
+                  </a>
+                </p>
+                <p>
+                  <a href="#shallow-vs-deep-copy">
+                    [JS] Shallow copy vs. Deep copy of objects
+                  </a>
+                </p>
+                <p>
+                  <a href="#basic-html-tag-meaning">
+                    [HTML] What each of the basic HTML tags mean
+                  </a>
+                </p>
+                <p>
+                  <a href="#2019-goals">[Personal] 2019 Goals</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="navbar-item">
+              <h3>Resume</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <script>
+      // tinkered w3 school accordion code
+      let acc = document.getElementsByClassName("accordion");
+      let panels = document.getElementsByClassName("panel");
+
+      for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          panels.item(i).classList.toggle("active");
+        });
+      }
+    </script>
   </body>
 </html>
